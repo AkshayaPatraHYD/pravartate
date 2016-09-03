@@ -71,6 +71,11 @@ CREATE TABLE IF NOT EXISTS `Login` (
   `createdOn` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `Login` (`loginId`, `group`, `email`, `password`, `createdOn`) VALUES ('1', 'admin', 'root@root.com', MD5('root'), '2016-09-10 17:30:44');
+INSERT INTO `Login` (`loginId`, `group`, `email`, `password`, `createdOn`) VALUES ('2', 'manager', 'manager1@root.com', MD5('root'), '2016-09-10 17:31:44');
+INSERT INTO `Login` (`loginId`, `group`, `email`, `password`, `createdOn`) VALUES ('3', 'manager', 'manager2@root.com', MD5('root'), '2016-09-10 17:32:45');
+INSERT INTO `Login` (`loginId`, `group`, `email`, `password`, `createdOn`) VALUES ('4', 'manager', 'manager3@root.com', MD5('root'), '2016-09-10 17:33:46');
+
 -- --------------------------------------------------------
 
 --

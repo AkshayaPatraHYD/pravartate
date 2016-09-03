@@ -1,0 +1,13 @@
+{% include "header.djt" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+<script src="ck/static/chartkick.js"></script>
+  
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-lg-4">
+			{% pie_chart data %}
+		</div>
+  	</div>	
+</div>
+
+{% include "footer.djt" %}

@@ -1,0 +1,27 @@
+{% include "header.djt" %}
+
+{% if not session.logged_in %}
+
+<div class="container">
+	<div class="row">
+	    <h1>Attendance Tracking System | Pravartate</h1>
+	    <div class="alert alert-dismissible alert-warning">
+	    	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	    	<h4>Warning!</h4>
+	    	<p>It looks like you're not logged in. Please login to continue <a href="/login" class="btn btn-success">Login Here</a>.</p>
+	    </div>
+	</div>
+</div>
+
+{% else %}
+  
+<div class="container">
+	<div class="row">
+	    <h1>Attendance Tracking System | Pravartate</h1>
+	    <p class="lead">Dashboard</p>
+	</div>
+</div>
+
+{% endif %}
+
+{% include "footer.djt" %}
