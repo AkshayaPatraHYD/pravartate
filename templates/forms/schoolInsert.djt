@@ -1,0 +1,118 @@
+<form class="form-horizontal" action="{{ url_for('insertSchool') }}" method="post" accept-charset="utf-8">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Register a School</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="schoolName">School Name</label>  
+  <div class="col-md-8">
+  <input id="schoolName" name="schoolName" type="text" placeholder="Enter Name of School" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="district">District</label>  
+  <div class="col-md-8">
+  <input id="district" name="district" type="text" placeholder="Enter the district " class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="mandal">Mandal</label>  
+  <div class="col-md-8">
+  <input id="mandal" name="mandal" type="text" placeholder="Enter the mandal " class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ItoVTotal">I - V Registered</label>  
+  <div class="col-md-8">
+  <input id="ItoVTotal" name="ItoVTotal" type="number" placeholder="Registered Students in I - V" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="VItoVIIITotal">VI to VIII Total</label>  
+  <div class="col-md-8">
+  <input id="VItoVIIITotal" name="VItoVIIITotal" type="number" placeholder="Registered Students in VI - VIII" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="IXtoXTotal">IX to X Total</label>  
+  <div class="col-md-8">
+  <input id="IXtoXTotal" name="IXtoXTotal" type="number" placeholder="Registered Students in IX - X" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="latitude">Latitude</label>  
+  <div class="col-md-8">
+  <input id="latitude" name="latitude" type="text" placeholder="Latitude of the School" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="longitude">Longitude</label>  
+  <div class="col-md-8">
+  <input id="longitude" name="longitude" type="text" placeholder="Longitude of the School" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="schoolPrincipalName">Principal Name</label>  
+  <div class="col-md-8">
+  <input id="schoolPrincipalName" name="schoolPrincipalName" type="text" placeholder="Name of the Principal / Admin" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Prepended text-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="schoolAdminPhone">Phone Number of Principal / Admin</label>
+  <div class="col-md-8">
+    <div class="input-group">
+      <span class="input-group-addon">+91</span>
+      <input id="schoolAdminPhone" name="schoolAdminPhone" class="form-control" placeholder="10 Digit Number here" type="number" required="">
+    </div>
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="schoolAdminDesignation">Designation</label>  
+  <div class="col-md-8">
+  <input id="schoolAdminDesignation" name="schoolAdminDesignation" type="text" placeholder="Designation / Role (Principal / Admin etc..,)" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-8">
+    <button id="submit" name="submit" class="btn btn-success">Register School</button>
+  </div>
+</div>
+
+</fieldset>
+</form>

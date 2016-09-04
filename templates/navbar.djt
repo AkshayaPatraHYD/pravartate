@@ -10,11 +10,21 @@
       <a class="navbar-brand" href="/">ATS | Akshaya Patra</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
+      {% if not session.logged_in %}
+      <ul class="nav navbar-nav pull-right">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+      {% else %}
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/api">API</a></li>
+        <li><a href="/kitchen">Kitchen</a></li>
+        <li><a href="/school">School</a></li>
+        <li><a href="/incomingSMS">Incoming SMS</a></li>
+        <li><a href="/visualize">Visualize</a></li>
       </ul>
+      {% endif %}
     </div><!--/.nav-collapse -->
   </div>
 </nav>
