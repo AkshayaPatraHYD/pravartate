@@ -1,0 +1,25 @@
+{% include "header.djt" %}
+
+<div class="container">
+
+	<div class="center-text">
+		<h1>School Details | Pravartate</h1>
+	</div>
+	<div class = "row">
+		<div class="col-sm-8">
+		{% if not data %}
+			<p>Looks like there are no schools added yet. These are the main tracking phone numbers for real time tracking</p>
+		{% else %}
+			<p>{{data}}</p>
+		{% endif %}
+		</div>
+		<div class="col-sm-4">
+
+			{% include "forms/schoolInsert.djt" %}
+
+		</fieldset>
+	</form>
+</div>
+</div>
+</div>
+{% include "footer.djt" %}

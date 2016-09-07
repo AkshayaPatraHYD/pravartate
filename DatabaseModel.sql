@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `AttendanceOLTP` (
   `time` datetime NOT NULL,
-  `adminPhoneNumber` int(10) NOT NULL,
+  `adminPhoneNumber` varchar(10) NOT NULL,
   `textMessage` varchar(100) NOT NULL,
   `schoolid` int(11) NOT NULL,
   `adminid` int(11) NOT NULL,
@@ -85,7 +85,7 @@ INSERT INTO `Login` (`loginId`, `group`, `email`, `password`, `createdOn`) VALUE
 CREATE TABLE IF NOT EXISTS `Manager` (
   `managerid` int(11) NOT NULL,
   `managerName` varchar(1000) NOT NULL,
-  `managerPhone` int(10) NOT NULL,
+  `managerPhone` varchar(10) NOT NULL,
   `schoolid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -105,8 +105,7 @@ CREATE TABLE IF NOT EXISTS `School` (
   `IXtoXTotal` int(11) NOT NULL,
   `allTotal` int(11) NOT NULL,
   `latitude` double NOT NULL,
-  `longitude` double NOT NULL,
-  `adminid` int(11) NOT NULL
+  `longitude` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -119,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `SchoolAdmins` (
   `schoolid` int(11) NOT NULL,
   `adminid` int(11) NOT NULL,
   `adminName` varchar(100) NOT NULL,
-  `adminPhoneNumber` int(10) NOT NULL,
+  `adminPhoneNumber` varchar(10) NOT NULL,
   `adminDesignation` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
