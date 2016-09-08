@@ -6,6 +6,7 @@ from flaskext.mysql import MySQL
 from config import config
 import datetime
 import chartkick
+import json
  
 import logging
 credentials = None
@@ -98,6 +99,112 @@ def insertkitchen():
     kitchenData=db.fetchall()
     db.execute("COMMIT")
     return render_template('kitchen.djt',data=kitchenData)
+
+@app.route('/school', methods=['GET', 'POST'])
+def insertSchool():
+    db = get_cursor()
+    if request.method == 'POST':
+        tempqry = 'select count(*) from School'
+        db.execute(tempqry)
+        schoolid = db.fetchone()[0]+1
+        # Parameters from form
+        schoolName = str(request.form['schoolName'])
+        schoolMandal = str(request.form['mandal'])
+        schoolDistrict = str(request.form['district'])
+        ItoVAttendance = int(request.form['ItoVTotal'])
+        VItoVIIIAttendance = int(request.form['VItoVIIITotal'])
+        IXtoXAttendance = int(request.form['IXtoXTotal'])
+        # latitude = str(request.form['latitude'])
+        # longitude = str(request.form['longitude'])
+        # @todo: Make them come somehow from a map.
+        latitude = 17.772928
+        longitude = 78.289101
+        schoolAdminName = str(request.form['schoolPrincipalName'])
+        schoolAdminPhone = str(request.form['schoolAdminPhone'])
+        schoolAdminDesig = str(request.form['schoolAdminDesignation'])
+        # End of parameters from form
+        schoolAdminTemp = 'select count(*) from SchoolAdmins'
+        db.execute(schoolAdminTemp)
+        adminid = db.fetchone()[0]+1
+        # All the required values are here from UI and DB Pre-requisites
+        # Computations and DB Results of processing
+        totalAttendance = ItoVAttendance + VItoVIIIAttendance + IXtoXAttendance
+        # School Inserts
+        setSchool = 'insert into School values("%d","%s","%s","%s","%d","%d","%d","%d","%f","%f")'
+        db.execute(setSchool%(schoolid, schoolDistrict, schoolName, schoolMandal, ItoVAttendance, VItoVIIIAttendance, IXtoXAttendance, totalAttendance, latitude, longitude))
+        # SchoolAdmin Inserts
+        setSchoolAdmins = 'insert into SchoolAdmins values("%d","%d","%s","%s","%s")'
+        db.execute(setSchoolAdmins%(schoolid, adminid, schoolAdminName, schoolAdminPhone, schoolAdminDesig))
+        db.execute("COMMIT")
+        return redirect(url_for('insertSchool'))
+    getSchools = 'select * from School'
+    db.execute(getSchools)
+    schoolData = db.fetchall()
+    db.execute("COMMIT")
+    return render_template('school.djt', data=schoolData)
+
+# API Controllers
+# API To register the attendance
+# To register 1 SMS Detail
+# Example usage for 1 single SMS Registration
+# 1. /api/todaysAttendance/1234567890/22,14,18
+@app.route('/api/todaysAttendance/<phoneNumber>/<text>', methods=['GET', 'POST'])
+def registerTodaysAttendance(phoneNumber=None, text=None):
+    db = get_cursor()
+    givenPhoneNumber = str(phoneNumber)
+    givenTextMessage = str(text)
+    attendanceDetails = givenTextMessage.split(',')
+    attendanceItems = len(attendanceDetails)
+    params = {}
+    if (attendanceItems == 1):
+        ItoVAttendance = int(attendanceDetails[0])
+        VItoVIIIAttendance = 0
+        IXtoXAttendance = 0
+    elif (attendanceItems == 2):
+        ItoVAttendance = int(attendanceDetails[0])
+        VItoVIIIAttendance = int(attendanceDetails[1])
+        IXtoXAttendance = 0
+    else:
+        ItoVAttendance = int(attendanceDetails[0])
+        VItoVIIIAttendance = int(attendanceDetails[1])
+        IXtoXAttendance = int(attendanceDetails[2])
+    getAdminDetails = 'select * from SchoolAdmins where adminPhoneNumber="%s"'%givenPhoneNumber
+    db.execute(getAdminDetails)
+    adminFetchedDetails = db.fetchone()
+    schoolid = adminFetchedDetails[0]
+    adminid = adminFetchedDetails[1]
+    adminName = adminFetchedDetails[2]
+    if schoolid:
+        # Given the school id map it to the school and fetch the required details
+        schoolQuery = 'select * from School where schoolid="%d"'%schoolid
+        db.execute(schoolQuery)
+        schoolData = db.fetchall()[0]
+        if schoolData:
+            mandal = schoolData[3]
+            schoolTotal = int(schoolData[7])
+            schoolName = schoolData[2]
+            timestampdata = datetime.datetime.now().strftime("%d/%m/%y %H:%M")
+            attendanceInsert = 'insert into AttendanceOLTP values("%s","%s","%s","%d","%d","%s","%d","%s","%s","%d","%d","%d")'
+            db.execute(attendanceInsert%(timestampdata, phoneNumber, text, schoolid, adminid, adminName, schoolTotal, schoolName, mandal, ItoVAttendance, VItoVIIIAttendance, IXtoXAttendance))
+            db.execute("COMMIT")
+            params['success'] = 'Successfully recorded attendance'
+            params['schoolName'] = schoolName
+            params['phoneNumber'] = phoneNumber
+            params['primaryItoV'] = ItoVAttendance
+            params['middleVItoVIII'] = VItoVIIIAttendance
+            params['highIXtoX'] = IXtoXAttendance
+            return json.dumps(params)
+    params['error'] = 'Error, Please check again and follow format /api/todaysAttendance/1234567890/22,14,18'
+    return json.dumps(params)
+
+@app.route('/visualize')
+def visualize():
+    db = get_cursor()
+    sql = 'select * from AttendanceOLTP'
+    db.execute(sql)
+    OLTPData = db.fetchall()
+    return render_template('visualize.djt', data = OLTPData)
+
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     return render_template('dashboard.djt')
