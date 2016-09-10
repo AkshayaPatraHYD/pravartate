@@ -76,6 +76,28 @@ def login():
             return redirect(url_for('dashboard'))
     return render_template('login.djt', error=error)
 
+@app.route('/kitchen', methods=['GET', 'POST'])
+def insertkitchen():
+    db = get_cursor()
+    if request.method == 'POST':
+        tempqry='select count(*) from Kitchen'
+        db.execute(tempqry)
+        idnum = db.fetchone()[0]+1
+        kcode = str(request.form['kcode'])
+        kname = str(request.form['kname'])
+        area = str(request.form['area'])
+        mid = int(request.form['mid'])
+        dist = str(request.form['dist'])
+        city = str(request.form['city'])
+        setkitchen = 'insert into Kitchen values("%d","%s","%s","%s","%d","%s","%s")'%(idnum,kcode,kname,area,mid,dist,city)
+        db.execute(setkitchen)
+        db.execute("COMMIT")
+        return redirect(url_for('insertkitchen'))
+    getKitchen='select * from Kitchen'
+    db.execute(getKitchen)
+    kitchenData=db.fetchall()
+    db.execute("COMMIT")
+    return render_template('kitchen.djt',data=kitchenData)
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     return render_template('dashboard.djt')

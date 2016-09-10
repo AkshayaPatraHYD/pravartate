@@ -1,0 +1,95 @@
+{% include "header.djt" %}
+
+<div class="container">
+
+	<div class="center-text">
+		<h1>Kitchen Details | Pravartate</h1>
+	</div>
+	<div class = "row">
+		<div class="col-sm-8">
+		{% if not data %}
+			<p>Looks like there are no kitchens added yet. Why don't you add one now.</p>
+		{% else %}
+			<p>{{data}}</p>
+		{% endif %}
+		</div>
+		<div class="col-sm-4">
+
+			<form class="form-horizontal" action="{{ url_for('insertkitchen') }}" method="post" accept-charset="utf-8">
+				<fieldset>
+
+					<!-- Form Name -->
+					<legend>Kitchen Details</legend>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="kcode">kitchen code</label>  
+						<div class="col-md-8">
+							<input id="kcode" name="kcode" placeholder="Enter kitchen code" class="form-control input-md" required="" type="text">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="kname">Kitchen Name</label>  
+						<div class="col-md-8">
+							<input id="kname" name="kname" placeholder="Enter Kitchen Name" class="form-control input-md" required="" type="text">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="area">Area</label>  
+						<div class="col-md-8">
+							<input id="area" name="area" placeholder="Enter Area" class="form-control input-md" required="" type="text">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="mid">Manager ID</label>  
+						<div class="col-md-8">
+							<input id="mid" name="mid" placeholder="Enter Manager ID" class="form-control input-md" required="" type="text">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="dist">District</label>  
+						<div class="col-md-8">
+							<input id="dist" name="dist" placeholder="Enter District" class="form-control input-md" required="" type="text">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="city">City</label>  
+						<div class="col-md-8">
+							<input id="city" name="city" placeholder="Enter City" class="form-control input-md" required="" type="text">
+
+						</div>
+					</div>
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="submit"></label>
+						<div class="col-md-8">
+							<button id="submit" name="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+
+
+
+				</fieldset>
+			</form>
+
+		</fieldset>
+	</form>
+</div>
+</div>
+</div>
+{% include "footer.djt" %}
