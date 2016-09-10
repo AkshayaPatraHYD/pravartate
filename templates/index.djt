@@ -1,0 +1,12 @@
+{% include "header.djt" %}
+  
+<div class="container">
+
+  <div class="center-text">
+    <h1>Attendance Tracking System | Pravartate</h1>
+    <p class="lead">This is the REST Endpoint server for Akshaya Patra's Attendance Tracking System.<br> Please use the login feature to continue to visualizations.</p>
+  </div>
+
+</div>
+
+{% include "footer.djt" %}

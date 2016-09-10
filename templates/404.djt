@@ -1,0 +1,12 @@
+{% include "header.djt" %}
+  
+<div class="container">
+
+  <div class="center-text">
+    <h1>Attendance Tracking System | Pravartate</h1>
+    <p class="lead">Ooops ! Looks like some signal is lost somewhere.</p>
+  </div>
+
+</div>
+
+{% include "footer.djt" %}
