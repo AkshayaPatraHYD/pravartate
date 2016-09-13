@@ -1,3 +1,4 @@
+{% if session.logged_in %}
 <form class="form-horizontal" action="{{ url_for('insertSchool') }}" method="post" accept-charset="utf-8">
 <fieldset>
 
@@ -116,3 +117,8 @@
 
 </fieldset>
 </form>
+{% else %}
+<div class="alert alert-info" role="alert">
+  Looks like you are not logged in! please Log in to enter details of the School
+</div>
+{% endif %}
