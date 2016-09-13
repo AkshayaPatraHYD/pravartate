@@ -76,6 +76,11 @@ def login():
             db.execute("COMMIT")
             return redirect(url_for('dashboard'))
     return render_template('login.djt', error=error)
+#Logout 
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    session['logged_in'] = False
+    return render_template('index.djt')
 
 @app.route('/kitchen', methods=['GET', 'POST'])
 def insertkitchen():

@@ -1,3 +1,4 @@
+{% if session.logged_in %}
 <form class="form-horizontal" action="{{ url_for('insertkitchen') }}" method="post" accept-charset="utf-8">
 	<fieldset>
 
@@ -64,8 +65,10 @@
 				<button id="submit" name="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</div>
-
-
-
 	</fieldset>
 </form>
+{% else %}
+<div class="alert alert-info" role="alert">
+	Looks like you are not logged in! please Log in to enter details of the kitchen
+</div>
+{% endif %}

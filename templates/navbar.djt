@@ -24,6 +24,9 @@
         <li><a href="/incomingSMS">Incoming SMS</a></li>
         <li><a href="/visualize">Visualize</a></li>
       </ul>
+       <ul class="nav navbar-nav pull-right">
+       <li><a href="/logout">Logout</a></li>
+       </ul>
       {% endif %}
     </div><!--/.nav-collapse -->
   </div>
